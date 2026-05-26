@@ -16,8 +16,8 @@ prompt text goes here, which can be multiple lines and include any content the u
 ```
 
 ## Output Format
-- **Type**: JSON string.
-- **Success**: OpenAI-compatible chat completion JSON.
+- **Type**: Plain text string.
+- **Success**: Assistant answer text extracted from the OpenAI-compatible chat completion response.
 - **Error**: `{"error":"message"}`
 
 ## Constraints

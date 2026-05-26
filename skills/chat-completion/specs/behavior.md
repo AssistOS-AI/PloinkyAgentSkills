@@ -6,6 +6,8 @@ The skill parses plain text input. The first line must declare the selected rout
 
 The skill builds the OpenAI-compatible request internally as `messages: [{ role: "user", content: text }]`. This guarantees the orchestrating LLM only selects an agent and passes task text, while transport formatting stays inside the deterministic C-Skill.
 
+The skill returns only the assistant answer text from the chat completion response, normally `choices[0].message.content`. It must not return the full OpenAI response object to the orchestrating LLM.
+
 ## Decisions & Questions
 
 ### Question #1: Why does this skill require an explicit agent line?

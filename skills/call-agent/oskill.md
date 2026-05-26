@@ -10,7 +10,7 @@ Selects and calls a Ploinky agent through RoutingServer. Use this skill when the
 4. Select the best agent by matching the user request against capability metadata. Prefer explicit tags and usage guidance when present, but do not require fixed fields.
 5. If no suitable agent is available, explain that no advertised agent matches the request.
 6. Pass the selected agent and the user's request text to chat-completion using text input: first line `agent: <name>`, then the request text.
-7. Never call an agent directly by host or port. All calls must go through the allowed C-Skills.
+7. Never call an agent directly by host, port, or custom HTTP code. All calls must go through the allowed C-Skills so the router can preserve delegated agent identity.
 
 ## Allowed Skills
 - get-capabilities

@@ -17,12 +17,27 @@ async function loadClient() {
     return await import(`${agentLibDir}/client/AgentHttpClient.mjs`);
 }
 
+function extractInvocationToken(context = {}) {
+    const candidates = [
+        context.invocationToken,
+        context.context?.invocationToken
+    ];
+    for (const candidate of candidates) {
+        if (typeof candidate === 'string' && candidate.trim()) {
+            return candidate.trim();
+        }
+    }
+    return '';
+}
+
 export async function action(context = {}) {
     try {
         const input = parseInput(context.promptText);
         const agent = typeof input.agent === 'string' && input.agent.trim() ? input.agent.trim() : undefined;
         const { createAgentHttpClient } = await loadClient();
-        const client = createAgentHttpClient();
+        const client = createAgentHttpClient({
+            invocationToken: extractInvocationToken(context)
+        });
         const response = await client.capabilities(agent);
         return JSON.stringify(response);
     } catch (error) {
